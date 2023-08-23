@@ -1372,6 +1372,7 @@ GameObject:
   - component: {fileID: 972265155}
   - component: {fileID: 972265154}
   - component: {fileID: 972265157}
+  - component: {fileID: 972265158}
   m_Layer: 0
   m_Name: DestroyObstacles
   m_TagString: Untagged
@@ -1402,7 +1403,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972265152}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
@@ -1415,7 +1416,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972265152}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1470,6 +1471,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e30ae447ced2440982c82ad9cd01fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &972265158
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972265152}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &984500247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1576,7 +1593,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 1322109527}
   scoreText: {fileID: 952045987}
   scoreUI: {fileID: 1081812379}
-  reloadingScene: 0
+  isDead: 0
 --- !u!4 &1054521736
 Transform:
   m_ObjectHideFlags: 0
@@ -1684,7 +1701,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'HIGESCORE: 10'
+  m_Text: 'HIGESCORE: '
 --- !u!114 &1058842230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2053,6 +2070,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1834376700041857205, guid: 8e78a902165372f44b8ec27fbb22976c, type: 3}
   m_PrefabInstance: {fileID: 1834376699129961016}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1239061142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239061133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59709f28007886c4abdc28cdd335f7ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  scoreText: {fileID: 1081812382}
+  scoreText2: {fileID: 952045987}
+  highscoreGameObject: {fileID: 1600903316}
+  gameOverHigescore: {fileID: 1058842229}
+  addingSpeedFrequency: 5
 --- !u!1 &1322109527
 GameObject:
   m_ObjectHideFlags: 0
@@ -2564,6 +2599,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 534669902}
+    - target: {fileID: 1834376699917619023, guid: 8e78a902165372f44b8ec27fbb22976c, type: 3}
+      propertyPath: playerSpeed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1834376700041368725, guid: 8e78a902165372f44b8ec27fbb22976c, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2612,5 +2651,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1239061140, guid: 8e78a902165372f44b8ec27fbb22976c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8e78a902165372f44b8ec27fbb22976c, type: 3}

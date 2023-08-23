@@ -22,9 +22,8 @@ public class DestroyObstacles : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, player.position.z - offset);
     }
     // Start is called before the first frame update
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("ht");
-       Destroy(other.gameObject);
+        Destroy(collision.gameObject);
     }
 }

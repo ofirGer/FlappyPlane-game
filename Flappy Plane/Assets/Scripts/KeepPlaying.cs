@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class KeepPlaying : MonoBehaviour
 {
-  
- 
-
     private GameObject[] music;
     void Start()
     {

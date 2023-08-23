@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject plane;
-    public GameObject pipes;
-    public float maxHeight = 21f;
+    [SerializeField] GameObject plane;
+    [SerializeField] GameObject pipes;
+    [SerializeField] float maxHeight = 21f;
     float minHeight = 0f;
     float spawnRate = 3f;
     float offset = 60f;
@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
     void Spawn()
     {
         float randomHeight = Random.Range(minHeight, maxHeight); 
-        // Spawn the pipes at random he
+        // Spawn the pipes at random heights
         Instantiate(pipes, new Vector3(transform.position.x, randomHeight, transform.position.z), Quaternion.identity);
         
         if (!plane.activeSelf)

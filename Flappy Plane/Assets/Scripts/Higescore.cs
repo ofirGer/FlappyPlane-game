@@ -4,17 +4,18 @@ using UnityEngine;
 
 public  class Higescore : MonoBehaviour
 {
-    Scorer scorer;
+   
     private void Start()
-    {
-        scorer = FindObjectOfType<Scorer>().GetComponent<Scorer>();
-    }
-    private void Update()
-    {
-        TrySetNewHigescore(scorer.score);
+    {        
+      // ResetScore();
     }
 
-    // Start is called before the first frame update
+    private static void ResetScore()
+    {
+        PlayerPrefs.SetInt("higescore", 0);
+        PlayerPrefs.Save();
+    }
+
     public  int GetHigescore()
     {
         return PlayerPrefs.GetInt("higescore");

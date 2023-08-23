@@ -7,63 +7,60 @@ using UnityEngine.UI;
 public class Scorer : MonoBehaviour
 {
     public int score;
-    public GameObject pipes;
-    public Text scoreText;
-    public Text scoreText2;
+    [SerializeField] Text scoreText;
+    [SerializeField] Text scoreText2;
 
-    public GameObject SfxPlayer;
-    public AudioClip pointClip;
-    AudioSource audioSource;
     float addSpeed = 1;
 
-    public Text highscoreGameObject;
-    public Text gameOverHigescore;
+    [SerializeField] Text highscoreGameObject;
+    [SerializeField] Text gameOverHigescore;
     Higescore higescore;
     PlayerControllerX playerController;
+    GameManager gameManager;
+    bool isDead;
+    [SerializeField] int addingSpeedFrequency = 5;
+
     void Start()
     {
-        audioSource = SfxPlayer.GetComponent<AudioSource>();
-        playerController = GetComponent<PlayerControllerX>();
-        higescore = FindObjectOfType<Higescore>().GetComponent<Higescore>();
-      
+        playerController = FindObjectOfType<PlayerControllerX>().GetComponent<PlayerControllerX>();
+        higescore = FindObjectOfType<Higescore>().GetComponent<Higescore>();       
+        gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        isDead = gameManager.isDead;
     }
 
-    // Update is called once per frame
     void Update()
     {
         scoreText.text = score.ToString();
         scoreText2.text = score.ToString();
-        highscoreGameObject.text = "HIGESCORE: " + higescore.GetHigescore().ToString();
-
+        highscoreGameObject.text = "HIGESCORE: " + higescore.GetHigescore().ToString();     
+            ShowGameOverHigescore();              
+    }
+    public void ShowGameOverHigescore()
+    {
         if (score > higescore.GetHigescore())
         {
-            gameOverHigescore.text = " NEW HIGESCORE! " ;
+            gameOverHigescore.text = " NEW HIGESCORE! ";
+            higescore.TrySetNewHigescore(score);
         }
         else
         {
             gameOverHigescore.text = "HIGESCORE: " + higescore.GetHigescore().ToString();
         }
-        
-
     }
     private void OnTriggerEnter(Collider scorer)
     {
-        audioSource.clip = pointClip;
-        score += 1;
-        //audioSource.Play();
-
-        if (score % 5 == 0 && score >= 5)
-        {       
+        AddScore(1);
+        ProccesseAddSpeed();
+    }
+    private void ProccesseAddSpeed()
+    {
+        if (score % addingSpeedFrequency == 0 && score >= addingSpeedFrequency)
+        {
             playerController.playerSpeed += addSpeed;
         }
-       
-
-       
-
     }
-    private void OnCollisionEnter(Collision collision)
+    private void AddScore(int scoreToAdd)
     {
-        
+        score += scoreToAdd;
     }
-
 }

@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class EndGame : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject explosion;
-    public GameObject mainCamera;
-    public GameObject hoodCamera;
+    [SerializeField] GameObject explosion;
+    [SerializeField] GameObject mainCamera;
+    [SerializeField] GameObject hoodCamera;
 
-    public GameObject SfxPlayer;
-    public AudioClip explosionClip;
+    [SerializeField] GameObject SfxPlayer;
+    [SerializeField] AudioClip explosionClip;
     AudioSource audioSource;
 
     GameManager gameManager;
@@ -24,15 +24,24 @@ public class EndGame : MonoBehaviour
     {
         hoodCamera.transform.parent = null;
         mainCamera.SetActive(true);
-        Instantiate(explosion, transform.position, Quaternion.identity);
+        PlayExplosionFx();
         gameObject.SetActive(false);
-
-        audioSource.clip = explosionClip;
-        audioSource.Play();
-
+        PlayExplosionSound();
+        gameManager.isDead = true;
         Invoke(nameof(ShowEndScreen), 1f);
 
     }
+    private void PlayExplosionSound()
+    {
+        audioSource.clip = explosionClip;
+        audioSource.Play();
+    }
+
+    private void PlayExplosionFx()
+    {
+        Instantiate(explosion, transform.position, Quaternion.identity);
+    }
+
     private void Update()
     {
         if (transform.position.y > 20 || transform.position.y < -20)
@@ -40,6 +49,7 @@ public class EndGame : MonoBehaviour
             hoodCamera.transform.parent = null;
             mainCamera.SetActive(true);
             gameObject.SetActive(false);
+            gameManager.isDead = true;
             Invoke(nameof(ShowEndScreen), 1f);
         }
     }
